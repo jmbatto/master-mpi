@@ -6,7 +6,7 @@
 version: "3.9"
 services:
   mpihead:
-    image: jmbatto/jmbatto/m2chps-mpi41:latest
+    image: jmbatto/m2chps-mpi41:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - usrlocalvarmpi-foo:/usr/local/var/mpishare
@@ -24,7 +24,7 @@ services:
       - source: "authorized_keys"
         target: "/home/mpiuser/.ssh-source/authorized_keys"
   mpinode:
-    image: jmbatto/jmbatto/m2chps-mpi41:latest
+    image: jmbatto/m2chps-mpi41:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - usrlocalvarmpi-foo:/usr/local/var/mpishare
