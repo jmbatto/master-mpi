@@ -5,15 +5,15 @@
 # Nov, 13, 2021 - Jean-Michel Batto
 version: "3.9"
 services:
-  mpihead:
-    image: jmbatto/jmbatto/m2chps-mpi31:latest
+  mpiheadold:
+    image: jmbatto/m2chps-mpi31:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - usrlocalvarmpi-foo:/usr/local/var/mpishare
     ports: 
       - "22"
     links: 
-      - mpinode
+      - mpinodeold
     networks:
       - mpinet
     secrets:                   
@@ -23,8 +23,8 @@ services:
         target: "/home/mpiuser/.ssh-source/id_rsa.pub"
       - source: "authorized_keys"
         target: "/home/mpiuser/.ssh-source/authorized_keys"
-  mpinode:
-    image: jmbatto/jmbatto/m2chps-mpi31:latest
+  mpinodeold:
+    image: jmbatto/m2chps-mpi31:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - usrlocalvarmpi-foo:/usr/local/var/mpishare
