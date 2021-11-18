@@ -73,7 +73,7 @@ RUN echo "rmaps_base_inherit = 1\n" >> /usr/local/etc/openmpi-mca-params.conf
 # ------------------------------------------------------------
 # Start mpi python install / user mpiuser
 # ------------------------------------------------------------
-RUN apt-get install -y --no-install-recommends python3-dev python3-numpy python3-pip python3-virtualenv python3-scipy \
+RUN apt-get install -y --no-install-recommends python3-dev python3-numpy python3-pip python3-virtualenv python3-scipy 2to3 \
     && apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN pip install --upgrade pip
@@ -93,6 +93,8 @@ USER root
 
 ADD ./mpi4py_benchmarks /home/mpiuser/mpi4py_benchmarks
 RUN chown -R mpiuser:mpiuser /home/mpiuser/mpi4py_benchmarks
+RUN cd /home/mpiuser/mpi4py_benchmarks && 2to3 -w --no-diffs *.py
+
 
 # ------------------------------------------------------------
 # Install Golang 1.17.3
