@@ -9,7 +9,7 @@ services:
     image: jmbatto/jmbatto/m2chps-mpi41:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - usrlocalvaryml-foo:/usr/local/var/yml
+      - usrlocalvarmpi-foo:/usr/local/var/mpishare
     ports: 
       - "22"
     links: 
@@ -18,25 +18,25 @@ services:
       - mpinet
     secrets:                   
       - source: "id_rsa"
-        target: "/home/ymluser/.ssh-source/id_rsa"
+        target: "/home/mpiuser/.ssh-source/id_rsa"
       - source: "id_rsa_mpi_pub"
-        target: "/home/ymluser/.ssh-source/id_rsa.pub"
+        target: "/home/mpiuser/.ssh-source/id_rsa.pub"
       - source: "authorized_keys"
-        target: "/home/ymluser/.ssh-source/authorized_keys"
+        target: "/home/mpiuser/.ssh-source/authorized_keys"
   mpinode:
     image: jmbatto/jmbatto/m2chps-mpi41:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - usrlocalvaryml-foo:/usr/local/var/yml
+      - usrlocalvarmpi-foo:/usr/local/var/mpishare
     networks:
       - mpinet
     secrets:                   
       - source: "id_rsa"
-        target: "/home/ymluser/.ssh-source/id_rsa"
+        target: "/home/mpiuser/.ssh-source/id_rsa"
       - source: "id_rsa_mpi_pub"
-        target: "/home/ymluser/.ssh-source/id_rsa.pub"
+        target: "/home/mpiuser/.ssh-source/id_rsa.pub"
       - source: "authorized_keys"
-        target: "/home/ymluser/.ssh-source/authorized_keys"
+        target: "/home/mpiuser/.ssh-source/authorized_keys"
 secrets:
   id_rsa_mpi_pub:
     file: ssh/id_rsa.mpi.pub
@@ -50,5 +50,5 @@ networks:
     name : yml_mpinet
     driver: overlay  
 volumes:
-  usrlocalvaryml-foo:
+  usrlocalvarmpi-foo:
     
